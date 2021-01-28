@@ -1,0 +1,41 @@
+map_replicate :: BX [(Char, Nat)] -> BX [[Char]]
+map_replicate = \l -> map (\a -> f a) l
+
+f :: BX (a, Nat) -> BX [a]
+f = \xn -> case* xn of
+               (x,n) | True ->
+                   replicate x n
+                   with (\$x0 -> True)
+                   reconciled by (\$x0 -> \$x1 -> $x0)
+
+map :: (BX (Char, Nat) -> BX [Char]) -> BX [(Char, Nat)] -> BX [[Char]]
+map = \f -> \l -> case* l of
+                      [] | True ->
+                          ![]
+                          with (\$x0 -> case $x0 of
+                                            [] | True -> True
+                                            _ | True -> False)
+                          reconciled by (\$x0 -> \$x1 -> [])
+                      x : xs | True ->
+                          (|f x : map f xs|)
+                          with (\$x0 -> case $x0 of
+                                            $x3 : $x2 | True -> True
+                                            _ | True -> False)
+                          reconciled by (\$x0 -> \$x1 -> case $x1 of
+                                                             $x3 : $x2 | True -> ('a', Z) : $x0)
+
+replicate :: BX a -> BX Nat -> BX [a]
+replicate = \x -> \n -> case* n of
+                            Z | True ->
+                                ![]
+                                with (\$x0 -> case $x0 of
+                                                  [] | True -> True
+                                                  _ | True -> False)
+                                reconciled by (\$x0 -> \$x1 -> Z)
+                            S n' | True ->
+                                (|x : replicate x n'|)
+                                with (\$x0 -> case $x0 of
+                                                  $x3 : $x2 | True -> True
+                                                  _ | True -> False)
+                                reconciled by (\$x0 -> \$x1 -> case $x1 of
+                                                                   $x3 : $x2 | True -> S $x0)

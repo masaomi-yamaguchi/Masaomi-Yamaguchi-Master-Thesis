@@ -1,0 +1,36 @@
+{ // VSCodeでstack buildをショートカットでできるようにする設定
+  // Ctrl + Shift + B でビルドできる
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Stack Build",
+      "type": "shell",
+      "command": "stack build",
+      "problemMatcher": [],
+      "args": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always", // terminalが閉じていても起動
+        "panel": "shared",
+        "focus": true // フォーカスをあてる
+      },
+    },
+    {
+      "label": "execute",
+      "type": "shell",
+      "command": "stack exec hobit",
+      "args": [],
+      "presentation": {
+        "reveal": "always", // terminalが閉じていても起動
+        "panel": "shared",
+        "focus": true // フォーカスをあてる
+      },
+      "problemMatcher": []
+    },
+  ]
+}

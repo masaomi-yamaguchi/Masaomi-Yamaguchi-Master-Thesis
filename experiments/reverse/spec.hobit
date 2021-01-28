@@ -1,0 +1,49 @@
+-- This is a specification file for synthesis.
+-- You need to put this file in the same directory as the files that function and examples are written.
+-- The order of #funs, #roots, #nonRoots #examples are fixed.
+--
+-- Specify the file that functions are written.
+
+#funs = "funs.hobit"
+
+-- Specify the name of root function.
+#root = reverse
+
+-- List the name of functions that may be bidirectional.
+-- If you want to declare 2 or more functions, 
+-- you can write as "NonRoots = f1, f2, f3, ..."
+#nonRoots = revAppend
+
+-- Specify the file that examples are written.
+#examples = "examples.hobit"
+
+-- result:            
+                   
+-- reverse :: BX [Nat] -> BX [Nat]
+-- reverse =          
+-- \l -> revAppend Z ![] l
+                   
+-- revAppend :: Nat -> BX [Nat] -> BX [Nat] -> BX [Nat]
+-- revAppend =        
+-- \n -> \e -> \l -> case* l of
+--                       [] | True ->
+--                           e
+--                           with (\$x0 -> case $x0 of
+--                                             $x2 | True -> eqN n (length $x2)
+--                                             _ | True -> False)
+--                           reconciled by (\$x0 -> \$x1 -> case $x1 of
+--                                                              $x2 | True -> [])
+--                       x : xs | True ->
+--                           revAppend (S n) (|(x : e)|) xs
+--                           with (\$x0 -> case $x0 of
+--                                             $x2 | True -> not (eqN (length $x2) n)
+--                                             _ | True -> False)
+--                           reconciled by (\$x0 -> \$x1 -> case $x1 of
+--                                                              $x2 | True -> $x1)
+                   
+                   
+-- time                 3.126 s    (2.510 s .. 3.459 s)
+--                      0.996 R²   (0.988 R² .. 1.000 R²)
+-- mean                 3.813 s    (3.510 s .. 4.383 s)
+-- std dev              560.4 ms   (23.31 ms .. 676.5 ms)
+-- variance introduced by outliers: 24% (moderately inflated)

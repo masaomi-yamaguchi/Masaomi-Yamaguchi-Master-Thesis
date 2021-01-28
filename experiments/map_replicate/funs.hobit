@@ -1,0 +1,19 @@
+data Nat = Z
+         | S Nat
+
+map_replicate :: [(Char, Nat)] -> [[Char]]
+map_replicate l = map (\a -> f a) l
+
+map :: ((Char, Nat) -> [Char]) -> [(Char, Nat)] -> [[Char]]
+map f l = case l of
+  []   -> []
+  x:xs -> f x:map f xs
+
+f :: (a, Nat) -> [a]
+f xn = let (x, n) = xn
+       in replicate x n
+
+replicate :: a -> Nat -> [a]
+replicate x n = case n of
+  Z    -> []
+  S n' -> x:replicate x n'

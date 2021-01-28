@@ -1,0 +1,12 @@
+-- Specify the file that functions are written.
+
+#funs = "funs.hobit"
+
+-- Specify the name of root function.
+#root = map_replicate
+
+-- List the name of functions that may be bidirectional.
+#nonRoots = map, f, replicate
+
+-- Specify the file that examples are written.
+#examples = "examples.hobit"

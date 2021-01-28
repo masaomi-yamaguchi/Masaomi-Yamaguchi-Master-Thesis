@@ -1,0 +1,8 @@
+appendPair :: ([a], [a]) -> [a]
+appendPair l = let (l1, l2) = l
+               in append l1 l2
+
+append :: [a] -> [a] -> [a]
+append l1 l2 = case l1 of
+  []   -> l2
+  x:xs -> x:append xs l2
