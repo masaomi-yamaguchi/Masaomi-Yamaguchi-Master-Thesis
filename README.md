@@ -1,3 +1,26 @@
+修士論文
+=====
+ビルド方法
+-------------
+最初に，[`stack`](https://docs.haskellstack.org/en/stable/README/) をインストールします．そして，以下のコマンドを実行します．
+
+```
+stack build
+```
+
+合成
+------
+experimentsのディレクトリに各実験用のディレクトリが用意されています．
+funs.hobitが順方向変換用のファイルで，examples.hobitが逆方向動作例です．spec.hobitは順方向用のファイルや逆方向動作例のファイルを指定するためのファイルです．
+
+合成の実行は，specファイルを指定します．たとえばappendでしたら
+```
+stack exec synthesis experiments/append/spec.hobit
+```
+で実行します．
+
+
+
 HOBiT
 ======
 
