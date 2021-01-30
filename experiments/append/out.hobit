@@ -2,16 +2,16 @@ appendPair :: BX ([a], [a]) -> BX [a]
 appendPair = \l -> case* l of
                        (l1,l2) ->
                            append l1 l2
-                           with (\$x1 -> True)
-                           reconciled by (\$x0 -> \$x1 -> $x0)
+                           with (\x1 -> True)
+                           reconciled by (\x0 -> \x1 -> x0)
 
 append :: BX [a] -> BX [a] -> BX [a]
 append = \l1 -> \l2 -> case* l1 of
-                           [] -> l2 with (\$x1 -> True) reconciled by (\$x0 -> \$x1 -> [])
+                           [] -> l2 with (\x1 -> True) reconciled by (\x0 -> \x1 -> [])
                            x : xs ->
                                (|x : append xs l2|)
-                               with (\$x1 -> case $x1 of
-                                                 $x3 : $x2 -> True
-                                                 _ -> False)
-                               reconciled by (\$x0 -> \$x1 -> case $x1 of
-                                                                  $x3 : $x2 -> $x0)
+                               with (\x1 -> case x1 of
+                                                x2 : x3 -> True
+                                                _ -> False)
+                               reconciled by (\x0 -> \x1 -> case x1 of
+                                                                x2 : x3 -> x0)

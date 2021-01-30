@@ -3,11 +3,11 @@ reverse = \l -> revAppend Z ![] l
 
 revAppend :: Nat -> BX [a] -> BX [a] -> BX [a]
 revAppend = \n -> \e -> \l -> case* l of
-    [] ->
-        e
-        with (\x1 -> eqN (length x1) n)
-        reconciled by (\x0 -> \x1 -> [])
-    x : xs ->
-        revAppend (S n) (|(x : e)|) xs
-        with (\x1 -> not (eqN n (length x1)))
-        reconciled by (\x0 -> \x1 -> x1)
+                                  [] ->
+                                      e
+                                      with (\x1 -> eqN n (length x1))
+                                      reconciled by (\x0 -> \x1 -> [])
+                                  x : xs ->
+                                      revAppend (S n) (|(x : e)|) xs
+                                      with (\x1 -> not (eqN (length x1) n))
+                                      reconciled by (\x0 -> \x1 -> x1)

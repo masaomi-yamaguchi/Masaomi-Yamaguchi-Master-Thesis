@@ -20,25 +20,25 @@ q4 = \t -> case* t of
                         !'n',
                         !'t'
                         ] |)) (| [ N (Na (q4_book ts)) ![] ] |)
-                   with (\$x1 -> True)
-                   reconciled by (\$x0 -> \$x1 -> $x0)
+                   with (\x1 -> True)
+                   reconciled by (\x0 -> \x1 -> x0)
 
 q4_book :: BX [Tree Lab] -> BX Nat
 q4_book = \l -> case* l of
                     [] ->
                         Z
-                        with (\$x1 -> case $x1 of
-                                          Z -> True
-                                          _ -> False)
-                        reconciled by (\$x0 -> \$x1 -> [])
+                        with (\x1 -> case x1 of
+                                         Z -> True
+                                         _ -> False)
+                        reconciled by (\x0 -> \x1 -> [])
                     N (E "section") xs : rest ->
                         S (q4_book rest)
-                        with (\$x1 -> case $x1 of
-                                          S $x2 -> True
-                                          _ -> False)
-                        reconciled by (\$x0 -> \$x1 -> case $x1 of
-                                                           S $x2 -> N (E "section") $x0 : $x0)
+                        with (\x1 -> case x1 of
+                                         S x2 -> True
+                                         _ -> False)
+                        reconciled by (\x0 -> \x1 -> case x1 of
+                                                         S x2 -> N (E "section") x0 : x0)
                     node : rest ->
                         q4_book rest
-                        with (\$x1 -> True)
-                        reconciled by (\$x0 -> \$x1 -> $x0)
+                        with (\x1 -> True)
+                        reconciled by (\x0 -> \x1 -> x0)
